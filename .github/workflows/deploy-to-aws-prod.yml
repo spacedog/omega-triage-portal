@@ -50,8 +50,6 @@ jobs:
           images: ${{ steps.ecr-login.outputs.registry }}/triage-portal-prod
           tags: |
             type=raw,value=latest
-            type=raw,value=main
-            type=sha
 
       - name: Get tags for image - Nginx
         id: metadata-nginx
@@ -60,8 +58,6 @@ jobs:
           images: ${{ steps.ecr-login.outputs.registry }}/nginx-prod
           tags: |
             type=raw,value=latest
-            type=raw,value=main
-            type=sha
 
       - name: Push image - Triage Portal
         uses: docker/build-push-action@v4
