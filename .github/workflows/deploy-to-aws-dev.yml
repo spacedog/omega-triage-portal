@@ -20,13 +20,17 @@ jobs:
         with:
           role-arn: ${{ secrets.OIDC_ROLE_ARN }}
           audience: 'sts.amazonaws.com'
-          export-variables: true
+          export-variables: false
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
+          aws-access-key-id: ${{ steps.oidc-auth.outputs.aws-access-key-id }}
+          aws-secret-access-key: ${{ steps.oidc-auth.outputs.aws-secret-access-key }}
+          aws-session-token: ${{ steps.oidc-auth.outputs.aws-session-token }}
           aws-region: us-west-2
           role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          role-skip-session-tagging: true
 
       - name: Login to Amazon ECR
         id: ecr-login
