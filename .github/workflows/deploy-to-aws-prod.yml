@@ -15,6 +15,9 @@ jobs:
     environment: prod
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v3
+
       - name: OIDC Auth
         uses: dflook/configure-oidc-aws-credentials@v1
         id: oidc-auth
